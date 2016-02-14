@@ -1,0 +1,14 @@
+<% include layout-header %>
+
+<script>
+  var socket = io.connect();
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+  socket.on('newFiles', function (data) {
+    console.log('newFiles', data);
+  });
+</script>
+
+<% include layout-footer %>

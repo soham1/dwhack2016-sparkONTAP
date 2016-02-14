@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('spark-dashboard:server');
 var http = require('http');
+var chokidar = require('chokidar');
+var jsonfile = require('jsonfile');
 
 /**
  * Get port from environment and store in Express.
@@ -21,6 +23,10 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+var io = require('socket.io')(server);
+var socket;
+
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -28,6 +34,30 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+io.on('connection', function (socket1) {
+  //TODO: Fix this. Socket is replaced with last client socket!
+  socket = socket1;
+  socket1.emit('news', { hello: 'world' });
+  socket1.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+
+chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
+  if(event === 'add' && socket){
+    console.log(event, path);
+    console.log('Doing socket.broadcast');
+    
+    jsonfile.readFile(path, function(err, obj) {
+      if(!err){
+        //console.dir(obj)
+        socket.emit('newFiles', obj);    
+      }
+    });
+  }
+});
 
 /**
  * Normalize a port into a number, string, or false.

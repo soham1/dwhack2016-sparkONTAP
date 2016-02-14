@@ -6,6 +6,8 @@ var client = redis.createClient(16022, 'pub-redis-16022.us-east-1-3.7.ec2.redisl
 });
 
 router.get('/test', function(req, res) {
+  console.log("Connecting the redis server");
+  
   client.auth('radha111', function(err) {
     if (err) console.log("err");
   });
