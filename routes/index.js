@@ -36,17 +36,18 @@ router.post('/campaign/upload', function(req, res) {
       
       var dataJson =  JSON.parse(allData); 
       console.log('allData', dataJson);
-      console.log('Sending emails');
-      sparkClient.transmissions.send(dataJson, function(err, resp) {
-        if (err) {
-          console.log(err);
-          res.json({err: err});
-        } else {
-          console.log(resp.body);
-          console.log("sendTransmission done");
-          res.json(resp.body);
-        }
-      });
+      console.log('Sending to verification');
+      res.render('veriyCampaign', dataJson);
+      // sparkClient.transmissions.send(dataJson, function(err, resp) {
+      //   if (err) {
+      //     console.log(err);
+      //     res.json({err: err});
+      //   } else {
+      //     console.log(resp.body);
+      //     console.log("sendTransmission done");
+      //     res.json(resp.body);
+      //   }
+      // });
     });
     req.pipe(busboy);
   
