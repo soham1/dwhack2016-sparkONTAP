@@ -1,25 +1,45 @@
 <% include layout-header %>
 
+<div style="padding-left: 30px;">
 <h4>Verify Campaign Data</h4>
 
-<div id="campaign">
-  
+<div class="row">
+      <div class="col s12 m6">
+        <div class="card white darken-1">
+          <div id="campaign" class="card-content blue-text">
+          </div>
+        </div>
+      </div>
 </div>
 
 
 <form action="/blastEmails" method="POST" id="blastForm">
-  <input name="campaign_id" id="campaign_id"/>
+  <div class="row">
+    <div class="input-field col s1" style="padding-top: 20px;">
+      <div>Campaign:</div>
+    </div>  
+    <div class="input-field col s2">
+      <input name="campaign_id" id="campaign_id" type="text" style="width: 300px"/>
+    </div>  
+  </div>  
   <textarea style="display: none" id="jsonData" name="jsonData"></textarea>
   <a type="submit" onclick="blastEmails()" class="waves-effect waves-light btn">Blast Emails</a>
 </form>
-
+</div>
 <script id="data-template" type="text/x-handlebars-template">
-  campaign_id = {{transmissionBody.campaign_id}}
-
+  <h4 class="card-title">{{transmissionBody.campaign_id}}</h4>
+  <p>
+  <h5>From: {{transmissionBody.content.from.name}}</h5>
+  <h6>Email: {{transmissionBody.content.from.email}}</h6>
+  <h6>Subject: {{transmissionBody.content.subject}}</h6>
+  <h5>Recipients:</h3>
   {{#each transmissionBody.recipients}}
-    <div>{{address.email}}</div>
-    <div>{{address.name}}</div>
-  {{/each}}  
+      <div class="row">
+        <h8 class="col s4">Name: {{address.name}}</h8>
+        <h8 class="col s4">Email: {{address.email}}</h8>
+      </div>
+  {{/each}}
+  </p>
 </script>
 
 
@@ -45,9 +65,5 @@
   }
 
 </script>
-
-
-
-
 
 <% include layout-footer %>
