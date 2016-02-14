@@ -85,6 +85,23 @@ router.post('/uploadCampaign', function(req, res) {
 
 
 
+router.get('/rerunCampaign', function(req, res, next) {
+  console.log(req.query.id);
+  var fileName = process.env.ONTAP_FOLDER + "/campaign-" +  req.query.id + '.json';
+  console.log("Reading campaign", fileName);
+  
+  jsonfile.readFile(fileName, function(err, allData) {
+    if(err){
+      console.log("Error reading campaign file");
+      res.render("error");
+    }else{
+      res.render('verifyCampaign', {allData: allData});
+    }
+  })
+  
+});
+
+
 router.get('/dashboard', function(req, res, next) {
   res.render('dashboard');
 });

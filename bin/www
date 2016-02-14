@@ -42,7 +42,12 @@ io.on('connection', function (socket1) {
   console.log('Client socket connected');
 });
 
-chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
+
+// chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
+//   if(event === 'add' && socket && path.indexOf("campaign-") == -1){
+
+
+chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', function(event, path){
   if(event === 'add' && socket && path.indexOf("campaign-") == -1){
     
     console.log(event, path);

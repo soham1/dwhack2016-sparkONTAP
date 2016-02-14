@@ -1,35 +1,37 @@
 <% include layout-header %>
 
-
-  <ul>
-  <% for(var i=0; i<campaign_ids.length; i++) {%>
-     <li><%= campaign_ids[i]%></li>
-  <% } %>
-  </ul>
-
-  <!--<form action="/campaign/upload" method="POST" enctype="multipart/form-data">-->
-  <!--  Select campagin data:-->
-  <!--  <input type="file" name="image">-->
-  <!--  <input type="submit" value="Upload Data">-->
-  <!--</form>-->
-  <div class="row center-align">
-
-      <p class="row center">
-          <h5 class="header col s12 light">Upload campaign data</h5>
-      </p>
-    
-      <div class="input-field col s2">
-      </div>  
-      <div class="input-field col s8">
-        
-        <form id="campaignForm" action="/uploadCampaign" method="POST" enctype="multipart/form-data">
-          <div class="file-field input-field">
-            <div class="btn">
-              <span>File</span>
-              <input id="file" type="file" name="image">
-            </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+  <div style="padding-left: 30px;">
+    <h4>Re-run Previous Campaigns</h4>
+    <ul>
+    <% for(var i=0; i<campaign_ids.length; i++) {%>
+      <li>
+        <a href="rerunCampaign?id=<%=campaign_ids[i]%>">
+          <%=campaign_ids[i]%>
+        </a>
+      </li>
+    <% } %>
+    </ul>
+  
+    <h4>New Campaign</h4>
+    <div class="row center-align">
+  
+        <p class="row center">
+            <h5 class="header col s12 light">Upload campaign data</h5>
+        </p>
+      
+        <div class="input-field col s2">
+        </div>  
+        <div class="input-field col s8">
+          
+          <form id="campaignForm" action="/uploadCampaign" method="POST" enctype="multipart/form-data">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input id="file" type="file" name="image">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
             </div>
           </div>
           <a type="submit" onclick="submitFile()" class="waves-effect waves-light btn">Verify and Upload</a>
@@ -37,7 +39,6 @@
         
       </div>
   </div>
-
   
   <script>
     function submitFile(){

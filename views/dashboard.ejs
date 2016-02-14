@@ -1,15 +1,18 @@
 <% include layout-header %>
 
-<ul id="liveData" class="collapsible" data-collapsible="accordion">
-</ul>  
-  <script id="webhook-data-template" type="text/x-handlebars-template">
-    {{#each dataList}}
-      <li>
-        <div class="collapsible-header"><i class="material-icons">event</i>{{msys.message.message_type}}</div>
-        <div class="collapsible-body"><p>Received on: {{msys.message.timestampDate}}</p></div>
-      </li>
-    {{/each}}
-  </script>
+<div style="padding-left: 30px;">
+  <h4>Live click events</h4>
+  <ul id="liveData" class="collapsible" data-collapsible="accordion">
+  </ul>  
+</div>
+<script id="webhook-data-template" type="text/x-handlebars-template">
+  {{#each dataList}}
+    <li>
+      <div class="collapsible-header"><i class="material-icons">event</i>{{msys.message.message_type}}</div>
+      <div class="collapsible-body"><p>Received on: {{msys.message.timestampDate}}</p></div>
+    </li>
+  {{/each}}
+</script>
 
 <script>
   var dataTemplate = Handlebars.compile($("#webhook-data-template").html());    
