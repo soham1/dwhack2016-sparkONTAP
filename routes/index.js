@@ -11,7 +11,7 @@ var sparkClient = new SparkPost("a43e2c6f22be937608691a17fe79e686df3b477e");
 var Busboy = require('busboy');
 var inspect = util.inspect;
 
-router.post('/campaign/upload', function(req, res) {
+router.post('/uploadCampaign', function(req, res) {
   console.log("uploading...");
 
     var busboy = new Busboy({ headers: req.headers });
@@ -37,7 +37,7 @@ router.post('/campaign/upload', function(req, res) {
       var dataJson =  JSON.parse(allData); 
       console.log('allData', dataJson);
       console.log('Sending to verification');
-      res.render('verifyCampaign', dataJson);
+      res.render('verifyCampaign', {json: dataJson});
       // sparkClient.transmissions.send(dataJson, function(err, resp) {
       //   if (err) {
       //     console.log(err);
@@ -70,9 +70,9 @@ router.get('/test', function(req, res, next) {
   res.render('index');
 });
 
-router.get('/email', function(req, res) {
-  res.render('email');
-});
+// router.get('/verifyCampaign', function(req, res) {
+//   res.render('verifyCampaign');
+// });
 
 router.get('/campaign', function(req, res) {
   res.render('campaign');
