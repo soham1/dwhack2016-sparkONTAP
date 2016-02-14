@@ -19,13 +19,15 @@ router.post('/api/webhook', function(req, res) {
     jsonfile.writeFile(file, obj, function (err) {
       console.error(err)
     });
-  }else{
+  }else if(req.body[0].msys.track_event){
     var file = process.env.ONTAP_FOLDER + "/track_event_" + req.body[0].msys.track_event.timestamp;
     console.log("File", file);
     var obj = req.body;
     jsonfile.writeFile(file, obj, function (err) {
       console.error(err)
     });
+  }else{
+    //Nothing to do since this is test message
   }
   res.sendStatus(200);
 });
