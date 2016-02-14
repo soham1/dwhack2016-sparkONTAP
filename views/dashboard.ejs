@@ -9,7 +9,12 @@
   {{#each dataList}}
     <li>
       <div class="collapsible-header"><i class="material-icons">event</i>{{msys.message.message_type}}</div>
-      <div class="collapsible-body"><p>Received on: {{msys.message.timestampDate}}</p></div>
+      <div class="collapsible-body">
+        <p>Received on: {{msys.message.timestampDate}}</p>
+        <p>
+          <pre style="padding-left: 20px;">{{msys.message.payload}}</pre>
+        </p>
+      </div>
     </li>
   {{/each}}
 </script>
@@ -37,14 +42,17 @@
     return a.toString();
   }
   
+//          payload: JsonHuman.format(JSON.stringify(d.msys[keys[0]], null, 2)),
+//          payload: JsonHuman.format(d.msys[keys[0]]).innerHTML,
   
+
   function renderData(data){
     var renderData = data.map(function(d){
       var keys = Object.keys(d.msys);
       if(keys.length > 0){
         d.msys.message = {
           message_type: keys[0],
-          payload: d,
+          payload: JSON.stringify(d.msys[keys[0]], null, 2),
           timestamp: d.msys[keys[0]].timestamp,
           timestampDate: uinuxTimestampToDate(d.msys[keys[0]].timestamp)
         }
