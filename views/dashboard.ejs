@@ -1,17 +1,15 @@
 <% include layout-header %>
 
-<div id="liveData">
-  
-</div>
-
-
-<script id="webhook-data-template" type="text/x-handlebars-template">
-
-  {{#each dataList}}
-    <div>{{msys.message.message_type}} Received on: {{msys.message.timestampDate}}</div>
-  {{/each}}
-
-</script>
+<ul id="liveData" class="collapsible" data-collapsible="accordion">
+</ul>  
+  <script id="webhook-data-template" type="text/x-handlebars-template">
+    {{#each dataList}}
+      <li>
+        <div class="collapsible-header"><i class="material-icons">event</i>{{msys.message.message_type}}</div>
+        <div class="collapsible-body"><p>Received on: {{msys.message.timestampDate}}</p></div>
+      </li>
+    {{/each}}
+  </script>
 
 <script>
   var dataTemplate = Handlebars.compile($("#webhook-data-template").html());    
@@ -54,6 +52,9 @@
     var html = dataTemplate({dataList: renderData});
     console.log(html);
     $("#liveData").prepend(html);
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
     
   }
 
