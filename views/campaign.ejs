@@ -5,19 +5,32 @@
   <!--  <input type="file" name="image">-->
   <!--  <input type="submit" value="Upload Data">-->
   <!--</form>-->
+  <div class="row center-align">
 
-  <form id="campaignForm" action="/uploadCampaign" method="POST" enctype="multipart/form-data">
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>File</span>
-        <input id="file" type="file" name="image">
+      <p class="row center">
+          <h5 class="header col s12 light">Upload campaign data</h5>
+      </p>
+    
+      <div class="input-field col s2">
+      </div>  
+      <div class="input-field col s8">
+        
+        <form id="campaignForm" action="/uploadCampaign" method="POST" enctype="multipart/form-data">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input id="file" type="file" name="image">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+          <a type="submit" onclick="submitFile()" class="waves-effect waves-light btn">Upload Data</a>
+        </form>
+        
       </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-    </div>
-    <a type="submit" onclick="submitFile()" class="waves-effect waves-light btn">Upload Data</a>
-  </form>
+  </div>
+
   
   <script>
     function submitFile(){

@@ -11,6 +11,24 @@ var sparkClient = new SparkPost("a43e2c6f22be937608691a17fe79e686df3b477e");
 var Busboy = require('busboy');
 var inspect = util.inspect;
 
+
+
+router.post('/blastEmails', function(req, res) {
+  var jsonData = req.body.jsonData;
+  console.log(jsonData);
+  console.log("Doing transmissions.send...");
+  sparkClient.transmissions.send(JSON.parse(jsonData), function(err, resp) {
+    if (err) {
+      console.log(err);
+      res.render("error");
+    } else {
+      console.log(resp.body);
+      console.log("sendTransmission done");
+      res.redirect("/dashboard");
+    }
+  });
+});
+
 router.post('/uploadCampaign', function(req, res) {
   console.log("uploading...");
 
@@ -37,7 +55,7 @@ router.post('/uploadCampaign', function(req, res) {
       var dataJson =  JSON.parse(allData); 
       console.log('allData', dataJson);
       console.log('Sending to verification');
-      res.render('verifyCampaign', {json: dataJson});
+      res.render('verifyCampaign', {allData: allData});
       // sparkClient.transmissions.send(dataJson, function(err, resp) {
       //   if (err) {
       //     console.log(err);

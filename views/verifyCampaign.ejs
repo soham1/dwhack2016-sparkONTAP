@@ -1,4 +1,36 @@
 <% include layout-header %>
-<h2>Data</h2>
-<code><%=json%></code>
+
+<h4>Verify Campaign Data</h4>
+
+<form action="/blastEmails" method="POST" id="blastForm">
+  <textarea style="display: none" id="jsonData" name="jsonData"></textarea>
+  <a type="submit" onclick="blastEmails()" class="waves-effect waves-light btn">Blast Emails</a>
+  
+</form>
+
+<script id="data-template" type="text/x-handlebars-template">
+  campaign_id = {{transmissionBody.campaign_id}}
+</script>
+
+
+<script>
+  var data = <%-allData%>;
+  var dataTemplate = Handlebars.compile($("#data-template").html());    
+  console.log(data);
+  var html = dataTemplate(data);
+  console.log(html);
+
+  
+  function blastEmails(){
+    $("#jsonData").val(JSON.stringify(data));
+    document.getElementById('blastForm').submit();
+    return false;
+  }
+
+</script>
+
+
+
+
+
 <% include layout-footer %>
