@@ -17,7 +17,7 @@ module.exports.sendTest = function() {
           text: 'Congratulations, {{name}}!! You just sent your very first mailing!'
         },
         substitutionData: {name: 'KAUSHIK'},
-        recipients: [{ address: { name: 'Kaushik Ashodiya', email: 'kaushik@ashodiya.poojarosebeauty.com' } }]
+        recipients: [{ address: { name: 'Kaushik Ashodiya', email: 'sohamashodiya.com' } }]
       }
     };
     

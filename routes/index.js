@@ -19,6 +19,9 @@ router.get('/test', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/email', function(req, res) {
+  res.render('email');
+});
 
 /* This function returns timestamp of first message. 
  *  If the message is empty, it returns false
@@ -63,6 +66,7 @@ router.post('api/webhook-redis', function(req, res) {
 
   client.on('connect', function() {
     console.log('Connected to Redis');
+    //TODO add entries to database
   });
 });
 

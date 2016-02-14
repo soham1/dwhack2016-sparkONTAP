@@ -1,0 +1,22 @@
+{
+  "name": "spark-dashboard",
+  "version": "0.0.0",
+  "homepage": "https://github.com/soham1/spark-dashboard",
+  "authors": [
+    "Soham Ashodiya <sohamashodiya@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Materialize": "materialize#~0.97.5"
+  }
+}
