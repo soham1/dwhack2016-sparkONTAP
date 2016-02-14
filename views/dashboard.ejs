@@ -8,7 +8,9 @@
 <script id="webhook-data-template" type="text/x-handlebars-template">
   {{#each dataList}}
     <li>
-      <div class="collapsible-header"><i class="material-icons">event</i>{{msys.message.message_type}}</div>
+      <div class="collapsible-header"><i class="material-icons">event</i>
+        {{msys.message.message_type}} - {{msys.message.timestampDate}}
+      </div>
       <div class="collapsible-body">
         <p>Received on: {{msys.message.timestampDate}}</p>
         <pre style="padding-left: 20px;">{{msys.message.payload}}</pre>
