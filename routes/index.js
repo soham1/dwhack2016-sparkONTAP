@@ -4,6 +4,7 @@ var jsonfile = require('jsonfile');
 var sparkclient = require("../sparkclient");
 jsonfile.spaces = 2;
 var util = require('util');
+var fs = require('fs');
 var SparkPost = require('sparkpost');
 var sparkClient = new SparkPost("a43e2c6f22be937608691a17fe79e686df3b477e");
 //var sparkClient = new SparkPost("db5a9a60694fe517f5366deb44cf037c16823a47");
@@ -15,18 +16,29 @@ var inspect = util.inspect;
 
 router.post('/blastEmails', function(req, res) {
   var jsonData = req.body.jsonData;
-  console.log(jsonData);
-  console.log("Doing transmissions.send...");
-  sparkClient.transmissions.send(JSON.parse(jsonData), function(err, resp) {
+  //console.log(jsonData);
+  var campaign_id = req.body.campaign_id;
+  console.log("Doing transmissions.send...", campaign_id);
+
+  var file = process.env.ONTAP_FOLDER + "/campaign-" + campaign_id + ".json";
+  console.log("Saving file", file);
+  jsonfile.writeFile(file, jsonData, function(err) {
     if (err) {
-      console.log(err);
-      res.render("error");
-    } else {
-      console.log(resp.body);
-      console.log("sendTransmission done");
-      res.redirect("/dashboard");
+      console.error('Error while saving file:', err);
+    }else{
+      sparkClient.transmissions.send(JSON.parse(jsonData), function(err, resp) {
+        if (err) {
+          console.log(err);
+          res.render("error");
+        } else {
+          console.log(resp.body);
+          console.log("sendTransmission done");
+          res.redirect("/dashboard");
+        }
+      });
     }
   });
+
 });
 
 router.post('/uploadCampaign', function(req, res) {
@@ -93,7 +105,24 @@ router.get('/test', function(req, res, next) {
 // });
 
 router.get('/campaign', function(req, res) {
-  res.render('campaign');
+  //Get old campaign files
+  fs.readdir(process.env.ONTAP_FOLDER, function(err, files) {
+    if(err){
+      console.log("Error while retrieving campaign files", err);
+      res.render("error");    
+    }else{
+      var files = files.filter(function(file) { 
+        return file.indexOf("campaign-") > -1; 
+      });
+      var campaign_ids = files.map(function(f){
+        return f.split("-")[1].split(".")[0];
+      });
+      console.log("files", files, campaign_ids);
+      res.render('campaign', {campaign_ids: campaign_ids});
+    }
+
+  });  
+
 });
 
 

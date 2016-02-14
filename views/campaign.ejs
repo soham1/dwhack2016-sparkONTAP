@@ -1,5 +1,12 @@
 <% include layout-header %>
 
+
+  <ul>
+  <% for(var i=0; i<campaign_ids.length; i++) {%>
+     <li><%= campaign_ids[i]%></li>
+  <% } %>
+  </ul>
+
   <!--<form action="/campaign/upload" method="POST" enctype="multipart/form-data">-->
   <!--  Select campagin data:-->
   <!--  <input type="file" name="image">-->

@@ -3,9 +3,9 @@
 <h4>Verify Campaign Data</h4>
 
 <form action="/blastEmails" method="POST" id="blastForm">
+  <input name="campaign_id" id="campaign_id"/>
   <textarea style="display: none" id="jsonData" name="jsonData"></textarea>
   <a type="submit" onclick="blastEmails()" class="waves-effect waves-light btn">Blast Emails</a>
-  
 </form>
 
 <script id="data-template" type="text/x-handlebars-template">
@@ -16,11 +16,15 @@
 <script>
   var data = <%-allData%>;
   var dataTemplate = Handlebars.compile($("#data-template").html());    
+  
   console.log(data);
   var html = dataTemplate(data);
   console.log(html);
-
   
+  $(function(){
+    $("#campaign_id").val(data.transmissionBody.campaign_id);
+  });
+
   function blastEmails(){
     $("#jsonData").val(JSON.stringify(data));
     document.getElementById('blastForm').submit();
