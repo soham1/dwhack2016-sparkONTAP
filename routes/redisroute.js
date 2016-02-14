@@ -5,9 +5,21 @@ var client = redis.createClient(16022, 'pub-redis-16022.us-east-1-3.7.ec2.redisl
   no_ready_check: true
 });
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/test', function(req, res) {
+  client.auth('radha111', function(err) {
+    if (err) console.log("err");
+  });
+
+  client.on('connect', function() {
+    console.log('Connected to Redis');
+    res.sendStatus(200);
+  });
+  
+  client.on("error", function (err) {
+    console.log("Error " + err);
+    res.sendStatus(200);
+  });
+  
 });
 
 module.exports = router;
