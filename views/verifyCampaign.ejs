@@ -2,6 +2,11 @@
 
 <h4>Verify Campaign Data</h4>
 
+<div id="campaign">
+  
+</div>
+
+
 <form action="/blastEmails" method="POST" id="blastForm">
   <input name="campaign_id" id="campaign_id"/>
   <textarea style="display: none" id="jsonData" name="jsonData"></textarea>
@@ -10,16 +15,24 @@
 
 <script id="data-template" type="text/x-handlebars-template">
   campaign_id = {{transmissionBody.campaign_id}}
+
+  {{#each transmissionBody.recipients}}
+    <div>{{address.email}}</div>
+    <div>{{address.name}}</div>
+  {{/each}}  
 </script>
 
 
 <script>
   var data = <%-allData%>;
   var dataTemplate = Handlebars.compile($("#data-template").html());    
-  
+
   console.log(data);
   var html = dataTemplate(data);
   console.log(html);
+  
+  $("#campaign").append(html);
+  
   
   $(function(){
     $("#campaign_id").val(data.transmissionBody.campaign_id);
