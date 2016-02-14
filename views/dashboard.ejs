@@ -44,6 +44,7 @@
       if(keys.length > 0){
         d.msys.message = {
           message_type: keys[0],
+          payload: d,
           timestamp: d.msys[keys[0]].timestamp,
           timestampDate: uinuxTimestampToDate(d.msys[keys[0]].timestamp)
         }

@@ -43,9 +43,6 @@ io.on('connection', function (socket1) {
 });
 
 
-// chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
-//   if(event === 'add' && socket && path.indexOf("campaign-") == -1){
-
 
 chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', function(event, path){
   if(event === 'add' && socket && path.indexOf("campaign-") == -1){
@@ -61,6 +58,24 @@ chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', functi
     });
   }
 });
+
+/*
+chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
+  if(event === 'add' && socket && path.indexOf("campaign-") == -1){
+    
+    console.log(event, path);
+    console.log('Doing socket.broadcast');
+    
+    jsonfile.readFile(path, function(err, obj) {
+      if(!err){
+        //console.dir(obj)
+        socket.emit('newFiles', obj);    
+      }
+    });
+  }
+});
+*/
+
 
 /**
  * Normalize a port into a number, string, or false.
