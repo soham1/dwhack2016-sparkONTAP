@@ -39,10 +39,7 @@ server.on('listening', onListening);
 io.on('connection', function (socket1) {
   //TODO: Fix this. Socket is replaced with last client socket!
   socket = socket1;
-  socket1.emit('news', { hello: 'world' });
-  socket1.on('my other event', function (data) {
-    console.log(data);
-  });
+  console.log('Client socket connected');
 });
 
 chokidar.watch(process.env.ONTAP_FOLDER, {ignored: /[\/\\]\./}).on('all', (event, path) => {
