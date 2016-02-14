@@ -1,9 +1,33 @@
 <% include layout-header %>
 
-    <form action="/campaign/upload" method="POST" enctype="multipart/form-data">
-      Select campagin data:
-      <input type="file" name="image"> 
-      <input type="submit" value="Upload Data">
-    </form>
+  <!--<form action="/campaign/upload" method="POST" enctype="multipart/form-data">-->
+  <!--  Select campagin data:-->
+  <!--  <input type="file" name="image">-->
+  <!--  <input type="submit" value="Upload Data">-->
+  <!--</form>-->
 
-<% include layout-footer %>
+  <form id="campaignForm" action="/campaign/upload" method="POST" enctype="multipart/form-data">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input id="file" type="file" name="image">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+    <a type="submit" onclick="submitFile()" class="waves-effect waves-light btn">Upload Data</a>
+  </form>
+  
+  <script>
+    function submitFile(){
+      if($("#file").val().length > 0){
+        document.getElementById('campaignForm').submit();
+      }else{
+        console.log("No file");
+        return false;
+      }
+    }
+  </script>
+  
+  <% include layout-footer %>
