@@ -1,4 +1,4 @@
-## Winner project of 2016 DevloperWeek hackathon 
+## Winning project of 2016 DeveloperWeek hackathon 
 
 ### For more information read presentation <a href="info/Spark ONTAP.pdf">slides</a>.
 
