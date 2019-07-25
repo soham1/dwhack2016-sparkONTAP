@@ -2,6 +2,8 @@
 
 Saving SparkPost events and related data on ONTAP storage never got this easier.
 
+Winner of Developer Week 2016.
+
 ## What exactly does it provide?
 
 * Top-Class Disaster Recovery
