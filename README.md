@@ -24,6 +24,8 @@ Saving SparkPost events and related data on ONTAP storage never got this easier.
     * All the data can be optionally encrypted.
     * The data is available for doing data analytics using BigData and other technologies. 
 
+<img src="https://i.imgur.com/YmpPypU.png" style="max-width: 700px">
+
 ## Built With
 
 * Node.js + Handlebars 
